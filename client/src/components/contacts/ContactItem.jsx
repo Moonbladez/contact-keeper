@@ -6,11 +6,12 @@ import { AiOutlineMail, AiOutlinePhone } from "react-icons/ai";
 
 export const ContactItem = ({ contact }) => {
 	const contactContext = useContext(ContactContext);
-	const { deleteContact } = contactContext;
+	const { deleteContact, setCurrent, clearCurrent } = contactContext;
 	const { name, id, email, phone, type } = contact;
 
 	const onDelete = () => {
 		deleteContact(id);
+		clearCurrent();
 	};
 
 	return (
@@ -36,12 +37,17 @@ export const ContactItem = ({ contact }) => {
 				{phone && (
 					<li>
 						<AiOutlinePhone></AiOutlinePhone>
-						{email}
+						{phone}
 					</li>
 				)}
 
 				<div>
-					<button className='btn btn-dark btn-sm'>Edit</button>
+					<button
+						className='btn btn-dark btn-sm'
+						onClick={() => setCurrent(contact)}
+					>
+						Edit
+					</button>
 					<button className='btn btn-danger btn-sm' onClick={onDelete}>
 						Delete
 					</button>
