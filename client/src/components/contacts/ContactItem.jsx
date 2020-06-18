@@ -6,9 +6,9 @@ import { AiOutlineMail, AiOutlinePhone } from "react-icons/ai";
 export const ContactItem = ({ contact }) => {
 	const { name, id, email, phone, type } = contact;
 	return (
-		<div className='card bg-light'>
+		<div className='card bg-light' key={id}>
 			<h3 className='text-primary text-left'>
-				{name}{" "}
+				{name}
 				<span
 					className={
 						`badge ` +

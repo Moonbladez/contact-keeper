@@ -9,7 +9,7 @@ export const Contacts = () => {
 	return (
 		<>
 			{contacts.map((contact) => (
-				<ContactItem contact={contact} key={contact.id} />
+				<ContactItem contact={contact} />
 			))}
 		</>
 	);
