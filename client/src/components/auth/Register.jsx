@@ -1,12 +1,32 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+
+import AlertContext from "../../context/alert/alertContext";
+import AuthContext from "../../context/auth/authContext";
+import { useContext } from "react";
 
 export const Register = () => {
-	const [user, setUser] = useState({
-		name: "",
-		email: "",
-		password: "",
-		password2: "",
+	const alertContext = useContext(AlertContext);
+	const authContext = useContext(AuthContext);
+
+	const { setAlert } = alertContext;
+	const { register, error, clearErrors } = authContext;
+
+	useEffect(() => {
+		if (error == "User already exsists") {
+			setAlert(error, "danger");
+			clearErrors();
+		}
 	});
+
+	const [user, setUser] = useState(
+		{
+			name: "",
+			email: "",
+			password: "",
+			password2: "",
+		},
+		[error]
+	);
 
 	const { name, email, password, password2 } = user;
 
@@ -16,7 +36,13 @@ export const Register = () => {
 
 	const onSubmit = (event) => {
 		event.preventDefault();
-		console.log("registration submitted");
+		if (name === "" || email === "" || password === "") {
+			setAlert("Please enter all fields", "danger");
+		} else if (password !== password2) {
+			setAlert("passwords do not match", "danger");
+		} else {
+			register({ name, email, password });
+		}
 	};
 
 	return (
@@ -27,11 +53,23 @@ export const Register = () => {
 			<form onSubmit={onSubmit}>
 				<div className='form-group'>
 					<label htmlFor='name'>name:</label>
-					<input type='text' name='name' value={name} onChange={onChange} />
+					<input
+						type='text'
+						name='name'
+						value={name}
+						onChange={onChange}
+						required
+					/>
 				</div>
 				<div className='form-group'>
 					<label htmlFor='email'>email:</label>
-					<input type='email' name='email' value={email} onChange={onChange} />
+					<input
+						type='email'
+						name='email'
+						value={email}
+						onChange={onChange}
+						required
+					/>
 				</div>
 				<div className='form-group'>
 					<label htmlFor='password'>password:</label>
@@ -40,6 +78,8 @@ export const Register = () => {
 						name='password'
 						value={password}
 						onChange={onChange}
+						required
+						minLength='6'
 					/>
 				</div>
 				<div className='form-group'>
@@ -47,7 +87,8 @@ export const Register = () => {
 					<input
 						type='password'
 						name='password2'
-						value={password}
+						value={password2}
+						minLength='6'
 						onChange={onChange}
 					/>
 				</div>
