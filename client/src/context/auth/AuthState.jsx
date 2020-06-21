@@ -92,7 +92,7 @@ export const AuthState = (props) => {
 
 	//logout user
 	const logout = () => {
-		console.log("load user");
+		dispatch({ type: LOGOUT });
 	};
 
 	//clear errors
