@@ -5,8 +5,8 @@
 	--primary-color: #009688;
 	--dark-color: #333333;
 	--light-color: #f4f4f4;
-	--danger-color: #dc3545;
-	--success-color: #28a745;
+	--danger-color: #d50000;
+	--success-color: #388e3c;
 }
 
 * {
@@ -244,6 +244,8 @@ img {
 	opacity: 0.9;
 	background: var(--light-color);
 	color: #333;
+	display: flex;
+	align-items: center;
 }
 
 .btn-primary,
