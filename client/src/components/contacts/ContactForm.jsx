@@ -62,6 +62,7 @@ export const ContactForm = () => {
 				name='name'
 				value={name}
 				onChange={onChange}
+				required
 			/>
 			<label htmlFor='email'>Email</label>
 			<input
@@ -70,6 +71,7 @@ export const ContactForm = () => {
 				name='email'
 				value={email}
 				onChange={onChange}
+				required
 			/>
 			<label htmlFor='phone'>Phone</label>
 			<input
@@ -78,6 +80,7 @@ export const ContactForm = () => {
 				name='phone'
 				value={phone}
 				onChange={onChange}
+				required
 			/>
 			<p htmlFor='type'>Contact Type</p>
 			<input

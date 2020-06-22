@@ -14,6 +14,8 @@ export const ContactItem = ({ contact }) => {
 		clearCurrent();
 	};
 
+	console.log("contact item", phone);
+
 	return (
 		<div className='card bg-light' key={id}>
 			<h3 className='text-primary text-left'>
@@ -36,8 +38,7 @@ export const ContactItem = ({ contact }) => {
 				)}
 				{phone && (
 					<li>
-						<AiOutlinePhone></AiOutlinePhone>
-						{phone}
+						<AiOutlinePhone /> {phone}
 					</li>
 				)}
 

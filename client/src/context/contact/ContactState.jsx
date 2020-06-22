@@ -10,37 +10,34 @@ import {
 	UPDATE_CONTACT,
 	FILTER_CONTACTS,
 	CLEAR_FILTER,
+	GET_CONTACTS,
+	CLEAR_CONTACTS,
 	CONTACT_ERROR,
 } from "../types";
 
 export const ContactState = (props) => {
 	const initalState = {
-		contacts: [
-			/* 	{
-				id: 1,
-				name: "Steve Rogers",
-				email: "americasass@gmail.com",
-				phone: "111-111-1111",
-				type: "personal",
-			},
-			{
-				id: 2,
-				name: "Tony Stark",
-				email: "ironman@gmail.com",
-				phone: "222-222-2222",
-				type: "professional",
-			}, */
-		],
+		contacts: null,
 		current: null,
 		filtered: null,
 	};
 
 	const [state, dispatch] = useReducer(contactReducer, initalState);
 
-	//add contact
+	//get contacts
+	const getContacts = async () => {
+		try {
+			const res = await axios.get("/api/contacts");
 
+			dispatch({ type: GET_CONTACTS, payload: res.data });
+		} catch (err) {
+			dispatch({ type: CONTACT_ERROR, payload: err.response.msg });
+		}
+	};
+
+	//add contact
 	const addContact = async (contact) => {
-		console.log(contact);
+		console.log("contact state", contact);
 		const config = {
 			headers: {
 				"Content-Type": "application/json",
@@ -59,6 +56,11 @@ export const ContactState = (props) => {
 	//delete contact
 	const deleteContact = (id) => {
 		dispatch({ type: DELETE_CONTACT, payload: id });
+	};
+
+	//clear contacts
+	const clearContacts = () => {
+		dispatch({ type: CLEAR_CONTACTS });
 	};
 
 	//set current contact
@@ -100,6 +102,8 @@ export const ContactState = (props) => {
 				updateContact,
 				filterContacts,
 				clearFilter,
+				getContacts,
+				clearContacts,
 			}}
 		>
 			{props.children}
