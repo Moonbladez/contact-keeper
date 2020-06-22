@@ -16,7 +16,7 @@ export const Register = (props) => {
 			props.history.push("/");
 		}
 
-		if (error == "User already exsists") {
+		if (error === "User already exsists") {
 			setAlert(error, "danger");
 			clearErrors();
 		}
