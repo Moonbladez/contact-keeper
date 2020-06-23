@@ -6,6 +6,8 @@ import { GoSignOut } from "react-icons/go";
 import AuthContext from "../../context/auth/authContext";
 import ContactContext from "../../context/contact/contactContext";
 
+import { AppBar, Typography } from "@material-ui/core";
+
 export const Navbar = ({ title, icon }) => {
 	const authContext = useContext(AuthContext);
 	const contactContext = useContext(ContactContext);
@@ -42,12 +44,12 @@ export const Navbar = ({ title, icon }) => {
 	);
 
 	return (
-		<div className='navbar bg-primary'>
-			<h1 className=''>
+		<AppBar className='navbar' position='static'>
+			<Typography variant='h3' component='h1'>
 				{icon} {title}
-			</h1>
+			</Typography>
 			<ul>{isAuthenticated ? authLinks : guestLinks}</ul>
-		</div>
+		</AppBar>
 	);
 };
 
