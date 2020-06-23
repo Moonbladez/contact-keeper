@@ -6,6 +6,8 @@ import { Contacts } from "../contacts/Contacts";
 import { ContactForm } from "../contacts/ContactForm";
 import { ContactFilter } from "../contacts/ContactFilter";
 
+import { Grid } from "@material-ui/core";
+
 export const Home = () => {
 	const authContext = useContext(AuthContext);
 
@@ -15,14 +17,14 @@ export const Home = () => {
 	}, []);
 
 	return (
-		<div className='grid-2'>
-			<div>
+		<Grid container spacing={6}>
+			<Grid item xs={12} md={6}>
 				<ContactForm />
-			</div>
-			<div>
+			</Grid>
+			<Grid item xs={12} md={6}>
 				<ContactFilter />
 				<Contacts />
-			</div>
-		</div>
+			</Grid>
+		</Grid>
 	);
 };

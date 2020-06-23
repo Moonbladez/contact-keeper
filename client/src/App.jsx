@@ -18,6 +18,8 @@ import { setAuthToken } from "./utils/setAuthToken";
 
 import { PrivateRoute } from "./components/routing/PrivateRoute";
 
+import Container from "@material-ui/core/Container";
+
 import "./App.css";
 
 if (localStorage.token) {
@@ -32,7 +34,7 @@ export const App = () => {
 					<BrowserRouter>
 						<>
 							<Navbar />
-							<main className='container'>
+							<Container>
 								<Alerts />
 								<Switch>
 									<PrivateRoute exact path='/' component={Home} />
@@ -40,7 +42,7 @@ export const App = () => {
 									<Route exact path='/register' component={Register} />
 									<Route exact path='/login' component={Login} />
 								</Switch>
-							</main>
+							</Container>
 						</>
 					</BrowserRouter>
 				</AlertState>

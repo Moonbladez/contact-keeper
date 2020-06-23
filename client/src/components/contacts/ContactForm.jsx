@@ -1,6 +1,9 @@
 import React, { useState, useContext, useEffect } from "react";
 import ContactContext from "../../context/contact/contactContext";
 
+import { Typography, Button, TextField } from "@material-ui/core";
+import styled from "styled-components";
+
 export const ContactForm = () => {
 	const contactContext = useContext(ContactContext);
 
@@ -52,35 +55,34 @@ export const ContactForm = () => {
 	};
 	return (
 		<form onSubmit={onSubmit}>
-			<h2 className='text-primary'>
+			<Heading variant='h4' component='h3'>
 				{current ? "update contact" : "add contact"}
-			</h2>
-			<label htmlFor='name'>Name</label>
-			<input
+			</Heading>
+
+			<TextField
 				type='text'
-				placeholder='name'
 				name='name'
 				value={name}
 				onChange={onChange}
 				required
+				label='name'
+				fullWidth
 			/>
-			<label htmlFor='email'>Email</label>
-			<input
+			<TextField
 				type='email'
-				placeholder='email'
 				name='email'
 				value={email}
 				onChange={onChange}
-				required
+				label='email'
+				fullWidth
 			/>
-			<label htmlFor='phone'>Phone</label>
-			<input
+			<TextField
 				type='text'
-				placeholder='phone'
 				name='phone'
 				value={phone}
 				onChange={onChange}
-				required
+				label='phone'
+				fullWidth
 			/>
 			<p htmlFor='type'>Contact Type</p>
 			<input
@@ -102,17 +104,31 @@ export const ContactForm = () => {
 			/>
 			<label htmlFor='professional'>Professional: </label>
 			<div>
-				<button type='submit' className='btn btn-primary btn-block'>
+				<FullWidthButton type='submit' color='primary' variant='contained'>
 					{current ? "update contact" : "add contact"}
-				</button>
+				</FullWidthButton>
 			</div>
 			{current && (
 				<div>
-					<button className='btn btn-light btn-block' onClick={clearAll}>
+					<FullWidthButton
+						onClick={clearAll}
+						variant='outlined'
+						color='secondary'
+						fullwidth
+					>
 						clear
-					</button>
+					</FullWidthButton>
 				</div>
 			)}
 		</form>
 	);
 };
+
+const FullWidthButton = styled(Button)`
+	width: 100%;
+	margin-top: 0.5rem;
+`;
+
+const Heading = styled(Typography)`
+	text-transform: capitalize;
+`;
